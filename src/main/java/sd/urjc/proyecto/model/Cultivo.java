@@ -1,4 +1,4 @@
-package sd.urjc.proyecto.cultivo;
+package sd.urjc.proyecto.model;
 
 public class Cultivo {
    private String zona;
