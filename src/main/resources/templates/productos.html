@@ -1,0 +1,14 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<h2>Productos</h2>
+	<p th:each="producto : ${productos}">
+		<a th:href="@{/mostrarProducto(nombre=${producto.nombre})}"><span
+			th:text="${producto.nombre}"></span></a>
+	</p>
+	<br>
+	<a href="/nuevoProducto.html"><span> Añadir nuevo producto </span></a>
+</body>
+</html>

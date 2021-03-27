@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<h2>Producto:</h2>
+	<span th:text="'Nombre: ' + ${producto.nombre}"></span>
+	<br />
+	<span th:text="'Descripción: '+ ${producto.descripcion}"></span>
+	<br />
+	<span th:text="'Plazo de reentrada: '+ ${producto.plazoReentrada}"></span>
+	<br />
+	<span th:text="'Plazo de recolección: '+ ${producto.plazoRecoleccion}"></span>
+	<br />
+	<br />
+	<a href="/"> Volver </a>
+</body>
+</html>
