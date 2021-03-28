@@ -13,6 +13,8 @@
 	<span th:text="'Plazo de recolección: '+ ${producto.plazoRecoleccion}"></span>
 	<br />
 	<br />
-	<a href="/"> Volver </a>
+	<a href="/productos/"> Volver </a>
+	<br />
+	<a th:href="@{/productos/modificar/{id}(id=${producto.id})}"> Editar </a>
 </body>
 </html>

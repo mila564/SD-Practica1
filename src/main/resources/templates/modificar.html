@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<form th:action="@{/productos/editar/{id}(id=${producto.id})}" method="post">
+		<p>Nombre:</p>
+		<input type="text" name="nombre" th:value="${producto.nombre}"> <br>
+		<p>Descripción:</p>
+		<textarea name="descripcion" rows="4" cols="30" th:field="*{producto.descripcion}"></textarea> <br>
+		<p>Plazo de reentrada:</p>
+		<input type="number" name="plazoReentrada" th:value="${producto.plazoReentrada}"> <br>
+		<p>Plazo de recolección:</p>
+		<input type="number" name="plazoRecoleccion" th:value="${producto.plazoRecoleccion}"> <br> <br>
+		<input type="submit" value="Modificar producto"> <br>
+	</form>
+	<a href="/productos/"> Volver </a>
+</body>
+</html>

@@ -5,10 +5,12 @@
 <body>
 	<h2>Productos</h2>
 	<p th:each="producto : ${productos}">
-		<a th:href="@{/mostrarProducto(nombre=${producto.nombre})}"><span
+		<a th:href="@{/productos/mostrar/{id}(id=${producto.id})}"><span
 			th:text="${producto.nombre}"></span></a>
 	</p>
 	<br>
 	<a href="/nuevoProducto.html"><span> Añadir nuevo producto </span></a>
 </body>
 </html>
+
+
