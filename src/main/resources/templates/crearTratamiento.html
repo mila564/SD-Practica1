@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo tratamiento</title>
+</head>
+<body>
+    <h1>Introduzca los datos del nuevo tratamiento</h1>
+    <form action="/tratamiento/crear" method="post">
+        Indique a que cultivo se le aplicó el tratamiento:
+        <p>
+            <select name="idCultivo">
+                <option value="${cultivo.id}" th:each="cultivo : ${cultivos}" th:text="${cultivo.nombre}"></option>
+            </select>
+        </p>
+        <p>
+            <select name="idProducto">
+                <option value="${producto.id}" th:each="producto : ${productos}" th:text="${producto.nombre}"></option>
+            </select>
+        </p>
+        Número del lote del producto utilizado:
+        <input type="text" name="numLoteProducto" size="32"><br>
+        Fecha de inicio del tratamiento:
+        <input type="date" name="inicioTratamiento"><br>
+        Fecha de fin del plazo de seguridad:
+        <input type="date" name="finPlazoSeguridad"><br>
+        Fecha de fin del plazo de no recolección:
+        <input type="date" name="finPlazoNoRecoleccion"><br>
+        <input type="submit" value="Crear"/>
+    </form>
+</body>
+</html>
