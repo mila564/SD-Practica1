@@ -34,7 +34,7 @@ public class ProductoController {
 	@RequestMapping("/productos/nuevoProducto")
 	public String añadirProducto (Producto producto, Model model) {
 		repProductos.save(producto);
-		return "creado";
+		return "creado_producto";
 	}
 	
 	@RequestMapping("/productos/modificar/{id}")
@@ -42,7 +42,7 @@ public class ProductoController {
 		Optional<Producto> opt= repProductos.findById(Long.parseLong(id));
 		if (opt.isPresent()) {
 			model.addAttribute("producto", opt.get());
-			return "modificar";
+			return "modificar_producto";
 		}
 		else {
 			return "productos";
@@ -60,7 +60,7 @@ public class ProductoController {
 			 producto.setPlazoReentrada(productoModificado.getPlazoReentrada());
 			 producto.setPlazoRecoleccion(productoModificado.getPlazoRecoleccion());
 			 repProductos.save(producto);
-			 return "editado";
+			 return "editado_producto";
 		}
 		else {
 			return "productos";
@@ -74,9 +74,23 @@ public class ProductoController {
 		Optional<Producto> opt= repProductos.findById(Long.parseLong(id));
 		if(opt.isPresent()) {			
 			model.addAttribute("producto", opt.get());
-			return "mostrar";
+			return "mostrar_producto";
 		}else {
 			return "productos";
+		}
+	}
+	
+	@RequestMapping("/productos/borrar/{id}")
+	public String borrarProducto(
+			@PathVariable String id,
+			Model model){
+		Optional<Producto> opt= repProductos.findById(Long.parseLong(id));
+		if (opt.isPresent()) {
+			repProductos.delete(opt.get());
+			return "borrado_producto";
+		}
+		else {
+			return "productos";	
 		}
 	}
 }
