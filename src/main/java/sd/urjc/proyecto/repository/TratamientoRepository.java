@@ -7,7 +7,5 @@ import java.util.Optional;
 
 @Service
 public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> {
-
-    @Override
-    Optional<Tratamiento> findById(Long aLong);
+    Optional<Tratamiento> findById(long aLong);
 }

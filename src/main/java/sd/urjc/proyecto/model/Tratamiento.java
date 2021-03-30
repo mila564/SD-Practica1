@@ -10,9 +10,9 @@ import java.time.LocalDate;
 public class Tratamiento {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idTratamiento;
-    private Long idCultivo;
-    private Long idProducto;
+    private long idTratamiento;
+    private long idCultivo;
+    private long idProducto;
     private String numLoteProducto;
     private LocalDate inicioTratamiento;
     private LocalDate finPlazoSeguridad;
@@ -22,8 +22,8 @@ public class Tratamiento {
 
     }
 
-    public Tratamiento(Long idCultivo,
-                       Long idProducto,
+    public Tratamiento(long idCultivo,
+                       long idProducto,
                        String numLoteProducto,
                        LocalDate inicioTratamiento,
                        LocalDate finPlazoSeguridad,
@@ -36,27 +36,27 @@ public class Tratamiento {
         this.finPlazoNoRecoleccion = finPlazoNoRecoleccion;
     }
 
-    public Long getIdTratamiento() {
+    public long getIdTratamiento() {
         return idTratamiento;
     }
 
-    public void setIdTratamiento(Long idTratamiento) {
+    public void setIdTratamiento(long idTratamiento) {
         this.idTratamiento = idTratamiento;
     }
 
-    public Long getIdCultivo() {
+    public long getIdCultivo() {
         return idCultivo;
     }
 
-    public void setIdCultivo(Long idCultivo) {
+    public void setIdCultivo(long idCultivo) {
         this.idCultivo = idCultivo;
     }
 
-    public Long getIdProducto() {
+    public long getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(Long idProducto) {
+    public void setIdProducto(long idProducto) {
         this.idProducto = idProducto;
     }
 
@@ -90,5 +90,14 @@ public class Tratamiento {
 
     public void setFinPlazoNoRecoleccion(LocalDate finPlazoNoRecoleccion) {
         this.finPlazoNoRecoleccion = finPlazoNoRecoleccion;
+    }
+    public String toString() {
+    	return "ID Tratamiento: "+this.idTratamiento+"\n"
+    			+ "ID cultivo:" + this.idCultivo + "\n"
+    			+ "ID producto:" + this.idProducto + "\n"
+    			+ "Numero de lote del producto:" + this.numLoteProducto + "\n"
+    			+ "Fecha de comienzo de tratamiento:" + this.inicioTratamiento + "\n"
+    			+ "Fecha de fin de plazo de seguridad:" +  this.finPlazoSeguridad + "\n"
+    			+ "Fecha de fin de plazo de no recoleccion:" + this.finPlazoNoRecoleccion + "\n";
     }
 }

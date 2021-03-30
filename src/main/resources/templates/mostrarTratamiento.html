@@ -1,0 +1,19 @@
+<html>
+	<body>
+	<h1>Datos del tratamiento</h1>
+		<p>Tratamiento ID: <span th:text="${tratamiento.idTratamiento}">. </p>
+		<p>Cultivo ID: <span th:text="${tratamiento.idCultivo}">. </span></p>
+		<p>Producto ID: <span th:text="${tratamiento.idProducto}">. </span></p>
+		<p>Numero de lote de producto: <span th:text="${tratamiento.numLoteProducto}">. </span></p>
+		<p>Fecha de inicio de tratamiento: <span th:text="${tratamiento.inicioTratamiento}">. </span></p>
+		<p>Fecha de fin de seguridad: <span th:text="${tratamiento.finPlazoSeguridad}">. </span><p>
+		<p>Fecha de final de plazo de no recoleccion: <span th:text="${tratamiento.finPlazoNoRecoleccion}">. </span></p>
+		<br>
+		<br>
+		<a th:href="@{/tratamiento/modificar/{id}(id=${tratamiento.idTratamiento})}">Modificar tratamiento</a>
+		<br>
+		<a href="/tratamiento/borrar">Borrar tratamiento</a>
+		<br>
+		<a href="/tratamiento">Volver</a>
+	</body>
+</html>

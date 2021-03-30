@@ -5,32 +5,37 @@
     <title>Nuevo tratamiento</title>
 </head>
 <body>
-    <h1>Introduzca los datos del nuevo tratamiento</h1>
-    <form action="/tratamiento/crear" method="post">
+    <h1>Introduzca los datos del tratamiento</h1>
+    <form action="/tratamiento/modificar" method="post">
         Indique a que cultivo se le aplicó el tratamiento:
         
         <p>
             <select name="idProducto">
+            	<option th:text="${producto.nombre}"selected></option>
                 <option th:each="producto : ${productos}" th:text="${producto.nombre}" th:value="${producto.id}" value="producto"></option>
             </select>
         </p>
         <br>
         <p>
             <select name="idCultivo">
+            	<option th:text="${cultivo.nombre}" selected></option>
                 <option  th:each="cultivo : ${cultivos}" th:text="${cultivo.nombre}" th:value="${cultivo.id}" value="cultivo"></option>
             </select>
         </p>
        
         
         Número del lote del producto utilizado:
-        <input type="text" name="numLoteProducto" size="32"><br>
+        <input type="text" name="numLoteProducto" size="32" th:value="${tratamiento.numLoteProducto}"><br>
         Fecha de inicio del tratamiento:
-        <input type="date" name="inicioTratamiento"><br>
+        <input type="date" name="inicioTratamiento" th:value="${tratamiento.inicioTratamiento}"><br>
         Fecha de fin del plazo de seguridad:
-        <input type="date" name="finPlazoSeguridad"><br>
+        <input type="date" name="finPlazoSeguridad" th:value="${tratamiento.finPlazoSeguridad}"><br>
         Fecha de fin del plazo de no recolección:
-        <input type="date" name="finPlazoNoRecoleccion"><br>
-        <input type="submit" value="Crear"/>
+        <input type="date" name="finPlazoNoRecoleccion" th:value="${tratamiento.finPlazoNoRecoleccion}"><br>
+        <br>
+        <input type="submit" value="Modificar"/>
+        <br>
+        <a href="/tratamiento">Volver a tratamientos</a>
     </form>
 </body>
 </html>
