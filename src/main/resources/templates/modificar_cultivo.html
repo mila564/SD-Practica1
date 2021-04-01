@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<form th:action="@{/cultivo/editar/{id}(id=${cultivo.id})}" method="post">
+		<p>Nombre:</p>
+		<input type="text" name="nombre" th:value="${cultivo.nombre}"> <br>
+		<p>Variedad:</p>
+		<input type="text" name="variedad" th:value="${cultivo.variedad}"> <br>
+		<p>Zona:</p>
+		<input type="text" name="zona" th:value="${cultivo.zona}"> <br>
+		<p>Fecha de plantación:</p>
+        <input type="date" name="fechaPlantacion" th:vale=${cultivo.fechaPlantacion}><br>
+		<input type="submit" value="Modificar cultivo"> <br>
+	</form>
+	<a href="/productos/"> Volver </a>
+</body>
+</html>

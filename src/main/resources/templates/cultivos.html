@@ -1,0 +1,14 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<h2>Cultivos</h2>
+	<p th:each="cultivo : ${cultivos}">
+		<a th:href="@{/cultivos/mostrar/{id}(id=${cultivo.id})}"><span
+			th:text="${cultivo.nombre}"></span></a>
+	</p>
+	<br>
+	<a href="/nuevoCultivo.html"><span> Añadir nuevo cultivo </span></a>
+</body>
+</html>

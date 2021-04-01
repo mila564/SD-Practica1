@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<h2>Cultivo:</h2>
+	<span th:text="'Nombre: ' + ${cultivo.nombre}"></span>
+	<br />
+	<span th:text="'Variedad: '+ ${cultivo.variedad}"></span>
+	<br />
+	<span th:text="'Zona: '+ ${cultivo.zona}"></span>
+	<br />
+	<span th:text="'Fecha de plantacion: '+ ${cultivo.fechaPlantacion}"></span>
+	<br />
+	<br />
+	<a th:href="@{/cultivos/modificar/{id}(id=${cultivo.id})}"> Editar </a>	
+	<br />
+	<a th:href="@{/cultivos/borrar/{id}(id=${cultivo.id})}"> Borrar </a>
+	<br />		
+	<a href="/cultivos/"> Volver </a>
+</body>
+</html>
