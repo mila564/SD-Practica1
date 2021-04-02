@@ -47,6 +47,9 @@ public class TratamientoController {
     							,@RequestParam String finPlazoNoRecoleccion
     							,Model model)
     {
+    	if(inicioTratamiento.equals("")|finPlazoSeguridad.equals("")|finPlazoNoRecoleccion.equals("")|numLoteProducto.equals("")) {
+    		return "errorTratamiento.html";
+    	}
     	LocalDate inicioTrat;
     	LocalDate finPlazoSeg;
     	LocalDate finPlazoNoRec;
@@ -56,6 +59,7 @@ public class TratamientoController {
     	finPlazoNoRec = LocalDate.parse(finPlazoNoRecoleccion, formatter);
     	long idCultivoNum = Long.parseLong(idCultivo);
     	long idProductoNum= Long.parseLong(idProducto);
+    
     	Tratamiento tratamiento = new Tratamiento(idCultivoNum,
     											  idProductoNum, 
     											  numLoteProducto,
