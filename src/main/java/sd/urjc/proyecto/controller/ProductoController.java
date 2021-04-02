@@ -23,6 +23,8 @@ public class ProductoController {
 		repProductos.save(new Producto("Microtox", "Fungicida-acaricida a base de azufre en forma de gránulos dispersables en agua.", 10, 14));
 		repProductos.save(new Producto("Captana", "Fungicida que actúa inhibiendo la germinación de las esporas, dificultando el crecimiento y desarrollo del micelo.", 9, 5));
 		repProductos.save(new Producto("Adrex", "Miscible con todo tipo de productos y puede aplicarse sobre todos los cultivos.", 4, 8));
+		repProductos.save(new Producto("Fruitel", "Aclara la floración y uniformar la maduración de los frutos.", 0, 28));
+		repProductos.save(new Producto("Poltix",  "Triazol sistémico de actividad preventiva y curativa, se aplica en pulverización foliar y es efectivo para el control de antracnosis, numerosos oídios, moteado, royas y otras enfermedades de propias de fungicidas.", 0, 0));
 	}
 	
 	@RequestMapping("/productos/")
