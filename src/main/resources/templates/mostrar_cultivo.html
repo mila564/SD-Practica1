@@ -12,6 +12,14 @@
 	<br />
 	<span th:text="'Fecha de plantacion: '+ ${cultivo.fechaPlantacion}"></span>
 	<br />
+	<span>Tratamientos: </span>
+	<br>
+	<p th:each= "tratamiento : ${cultivo.tratamientos}">
+		<a th:href="@{/tratamiento/{id}(id=${tratamiento.idTratamiento})">
+		<span th:text="'Tratamiento '+ ${tratamiento.idTratamiento}"></span>
+		</a>
+	</p>
+	<br>
 	<br />
 	<a th:href="@{/cultivos/modificar/{id}(id=${cultivo.id})}"> Editar </a>	
 	<br />

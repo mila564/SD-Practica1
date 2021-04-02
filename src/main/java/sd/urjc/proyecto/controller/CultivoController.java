@@ -68,7 +68,6 @@ public class CultivoController {
 	 @RequestMapping("/cultivos/modificar/{id}")
 	 public String modificarCultivo(@PathVariable long id, Model model) {
 	    Optional<Cultivo> opt = repCultivos.findById(id);
-	    Cultivo cultivo;
 		if (opt.isPresent()) {
 			model.addAttribute("cultivo", opt.get());
 			return "modificar_cultivo";
