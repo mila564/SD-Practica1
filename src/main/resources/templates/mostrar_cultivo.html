@@ -15,7 +15,7 @@
 	<span>Tratamientos: </span>
 	<br>
 	<p th:each= "tratamiento : ${cultivo.tratamientos}">
-		<a th:href="@{/tratamiento/{id}(id=${tratamiento.idTratamiento})">
+		<a th:href="@{/tratamiento/{id}(id=${tratamiento.idTratamiento})}">
 		<span th:text="'Tratamiento '+ ${tratamiento.idTratamiento}"></span>
 		</a>
 	</p>

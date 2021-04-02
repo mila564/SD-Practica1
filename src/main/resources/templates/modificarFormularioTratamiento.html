@@ -6,32 +6,25 @@
 </head>
 <body>
     <h1>Introduzca los datos del tratamiento</h1>
-    <form action="/tratamiento/modificar" method="post">
+    <form th:action="@{/tratamiento/modificar-objeto/{id}(id=${tratamientoOriginal.idTratamiento})}" method="post">
         Indique a que cultivo se le aplicó el tratamiento:
-        
+        <p>
+            <select name="idCultivo">
+                <option selected th:text="${cultivoOriginal.nombre}" th:value="${cultivoOriginal.id}"></option>
+                <option  th:each="cultivo : ${cultivos}" th:text="${cultivo.nombre}" th:value="${cultivo.id}" value="cultivo"></option>
+            </select>
+        </p>
         <p>
             <select name="idProducto">
-            	<option th:text="${producto.nombre}"selected></option>
+            	<option selected th:text="${productoOriginal.nombre}" th:value="${productoOriginal.id}"></option>
                 <option th:each="producto : ${productos}" th:text="${producto.nombre}" th:value="${producto.id}" value="producto"></option>
             </select>
         </p>
         <br>
-        <p>
-            <select name="idCultivo">
-            	<option th:text="${cultivo.nombre}" selected></option>
-                <option  th:each="cultivo : ${cultivos}" th:text="${cultivo.nombre}" th:value="${cultivo.id}" value="cultivo"></option>
-            </select>
-        </p>
-       
-        
         Número del lote del producto utilizado:
-        <input type="text" name="numLoteProducto" size="32" th:value="${tratamiento.numLoteProducto}"><br>
+        <input type="text" name="numLoteProducto" size="32" th:value="${tratamientoOriginal.numLoteProducto}"><br>
         Fecha de inicio del tratamiento:
-        <input type="date" name="inicioTratamiento" th:value="${tratamiento.inicioTratamiento}"><br>
-        Fecha de fin del plazo de seguridad:
-        <input type="date" name="finPlazoSeguridad" th:value="${tratamiento.finPlazoSeguridad}"><br>
-        Fecha de fin del plazo de no recolección:
-        <input type="date" name="finPlazoNoRecoleccion" th:value="${tratamiento.finPlazoNoRecoleccion}"><br>
+        <input type="date" name="inicioTratamiento" th:value="${tratamientoOriginal.inicioTratamiento}"><br>
         <br>
         <input type="submit" value="Modificar"/>
         <br>
