@@ -33,8 +33,15 @@ public class ProductoController {
 	
 	@RequestMapping("/productos/nuevoProducto")
 	public String añadirProducto (Producto producto, Model model) {
-		repProductos.save(producto);
-		return "creado_producto";
+		if (!producto.getNombre().equals("") 
+				&& producto.getPlazoRecoleccion()>= 0 
+				&& producto.getPlazoReentrada() >= 0) {
+			repProductos.save(producto);
+			return "creado_producto";
+		}
+		else {
+			return "campos_erroneos_productos";
+		}
 	}
 	
 	@RequestMapping("/productos/modificar/{id}")
@@ -53,7 +60,10 @@ public class ProductoController {
 	public String editarProducto(@PathVariable String id, Producto productoModificado, Model model) {
 		Optional<Producto> opt= repProductos.findById(Long.parseLong(id));
 		Producto producto;
-		if (opt.isPresent()) {
+		if (opt.isPresent() 
+				&& (!productoModificado.getNombre().equals("")) 
+				&& (productoModificado.getPlazoReentrada() >= 0)
+				&& (productoModificado.getPlazoRecoleccion() >= 0)) {
 			 producto= opt.get();
 			 producto.setNombre(productoModificado.getNombre());
 			 producto.setDescripcion(productoModificado.getDescripcion());
@@ -63,7 +73,7 @@ public class ProductoController {
 			 return "editado_producto";
 		}
 		else {
-			return "productos";
+			return "campos_erroneos_productos";
 		}
 	}
 	

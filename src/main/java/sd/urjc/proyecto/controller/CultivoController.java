@@ -3,8 +3,6 @@ package sd.urjc.proyecto.controller;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
@@ -12,15 +10,11 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import sd.urjc.proyecto.model.Cultivo;
-import sd.urjc.proyecto.model.Producto;
-import sd.urjc.proyecto.model.Tratamiento;
 import sd.urjc.proyecto.repository.CultivoRepository;
 import sd.urjc.proyecto.repository.TratamientoRepository;
 
@@ -48,19 +42,26 @@ public class CultivoController {
 	}
 		
 	@RequestMapping("/cultivos/nuevoCultivo")
-	public String añadirCultivo (@RequestParam String nombre
-			,@RequestParam String variedad
-			,@RequestParam String zona
-			,@RequestParam String fechaPlantacion, Model model) {
+	public String añadirCultivo (@RequestParam String nombre,
+			@RequestParam String variedad,
+			@RequestParam String zona,
+			@RequestParam String fechaPlantacion, Model model) {
 		LocalDate fechaPlant;
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		fechaPlant = LocalDate.parse(fechaPlantacion, formatter);
-		Cultivo cultivo = new Cultivo(nombre,
-				  variedad, 
-				  zona,
-				  fechaPlant);
-		repCultivos.save(cultivo);
-		return "creado_cultivo";
+		DateTimeFormatter formatter; 
+		Cultivo cultivo; 
+		if ((!nombre.equals("")) && (!variedad.equals("")) && (!fechaPlantacion.equals(""))) {
+			formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			fechaPlant = LocalDate.parse(fechaPlantacion, formatter);
+			cultivo = new Cultivo(nombre,
+					  variedad, 
+					  zona,
+					  fechaPlant);
+			repCultivos.save(cultivo);
+			return "creado_cultivo";
+		}
+		else {
+			return "campos_erroneos_cultivos";
+		}
 	}
 	 
 	
@@ -73,7 +74,7 @@ public class CultivoController {
 			return "modificar_cultivo";
 		}
 		else {
-			return "cultvos";
+			return "cultivos";
 		
 		}
 	 }
@@ -84,25 +85,22 @@ public class CultivoController {
 				,@RequestParam String zona
 				,@RequestParam String fechaPlantacion, Model model) {
 		 	LocalDate fechaPlant;
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			fechaPlant = LocalDate.parse(fechaPlantacion, formatter);
+			DateTimeFormatter formatter;
 			Optional<Cultivo> opt= repCultivos.findById(Long.parseLong(id));
-			Cultivo cultivoModificado = new Cultivo(nombre,
-					  variedad, 
-					  zona,
-					  fechaPlant);
 			Cultivo cultivo;
-			if (opt.isPresent()) {
-			     cultivo= opt.get();
-				 cultivo.setNombre(cultivoModificado.getNombre());
-				 cultivo.setVariedad(cultivoModificado.getVariedad());
-				 cultivo.setZona(cultivoModificado.getZona());
-				 cultivo.setFechaPlantacion(cultivoModificado.getFechaPlantacion());
-				 repCultivos.save(cultivo);
-				 return "editado_cultivo";
+			if ((opt.isPresent()) && (!nombre.equals("")) && (!variedad.equals("")) && (!fechaPlantacion.equals(""))) {
+				formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				fechaPlant = LocalDate.parse(fechaPlantacion, formatter);
+			    cultivo= opt.get();
+				cultivo.setNombre(nombre);
+				cultivo.setVariedad(variedad);
+				cultivo.setZona(zona);
+				cultivo.setFechaPlantacion(fechaPlant);
+				repCultivos.save(cultivo);
+				return "editado_cultivo";
 			}
 			else {
-				return "cultivos";
+				return "campos_erroneos_cultivos";
 			}
 		}
 	 @RequestMapping("/cultivos/mostrar/{id}")
