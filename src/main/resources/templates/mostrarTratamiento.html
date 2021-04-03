@@ -1,9 +1,9 @@
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<body>
 	<h1>Datos del tratamiento</h1>
-		<p>Tratamiento ID: <span th:text="${tratamiento.idTratamiento}">. </p>
-		<p>Cultivo ID: <span th:text="${tratamiento.idCultivo}">. </span></p>
-		<p>Producto ID: <span th:text="${tratamiento.idProducto}">. </span></p>
+		<p>Tratamiento ID: <span th:text="${tratamiento.idTratamiento}">. </span></p>
+		<p>Cultivo: <span th:text="${cultivo.nombre}">. </span></p>
+		<p>Producto: <span th:text="${producto.nombre}">. </span></p>
 		<p>Numero de lote de producto: <span th:text="${tratamiento.numLoteProducto}">. </span></p>
 		<p>Fecha de inicio de tratamiento: <span th:text="${tratamiento.inicioTratamiento}">. </span></p>
 		<p>Fecha de fin de seguridad: <span th:text="${tratamiento.finPlazoSeguridad}">. </span><p>
@@ -12,7 +12,7 @@
 		<br>
 		<a th:href="@{/tratamiento/modificar/{id}(id=${tratamiento.idTratamiento})}">Modificar tratamiento</a>
 		<br>
-		<a href="/tratamiento/borrar">Borrar tratamiento</a>
+		<a th:href="@{/tratamiento/borrar/{id}(id=${tratamiento.idTratamiento})}">Borrar tratamiento</a>
 		<br>
 		<a href="/tratamiento">Volver</a>
 	</body>
