@@ -7,24 +7,37 @@
 <body>
     <h1>Introduzca los datos del nuevo tratamiento</h1>
     <form action="/tratamiento/crear" method="post">
-        Indique a que cultivo se le aplicó el tratamiento:
-        <p>
-            <select name="idCultivo">
-                <option  th:each="cultivo : ${cultivos}" th:text="${cultivo.nombre}" th:value="${cultivo.id}" value="cultivo"></option>
-            </select>
-        </p>
+        Indique que producto se aplicó en el tratamiento:
+        <br>
         <p>
             <select name="idProducto">
                 <option th:each="producto : ${productos}" th:text="${producto.nombre}" th:value="${producto.id}" value="producto"></option>
             </select>
         </p>
         <br>
+        Indique a que cultivo se le aplicó el tratamiento:
+        <br>
+        <p>
+            <select name="idCultivo">
+                <option  th:each="cultivo : ${cultivos}" th:text="${cultivo.nombre}" th:value="${cultivo.id}" value="cultivo"></option>
+            </select>
+        </p>
+
+        <br>
         
         Número del lote del producto utilizado:
-        <input type="text" name="numLoteProducto" size="32"><br>
+        <input type="text" name="numLoteProducto" size="32">
+        <br>
         Fecha de inicio del tratamiento:
-        <input type="date" name="inicioTratamiento"><br>
+        <input type="date" name="inicioTratamiento">
+        <br>
         <input type="submit" value="Crear"/>
+        <br><br><br><br>
+        <a href="/nuevoProducto.html">Definir nuevo producto</a>
+        <br>
+        <a href="/nuevoCultivo.html">Definir nuevo cultivo</a>
+        <br>
+        <a href="/tratamiento">Volver</a>
     </form>
 </body>
 </html>
