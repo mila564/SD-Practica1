@@ -1,9 +1,6 @@
 package sd.urjc.proyecto.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -11,8 +8,12 @@ public class Tratamiento {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idTratamiento;
-    private long idCultivo;
-    private long idProducto;
+    //private long idCultivo;
+    @ManyToOne
+    private Cultivo cultivo;
+    //private long idProducto;
+    @ManyToOne
+    private Producto producto;
     private String numLoteProducto;
     private LocalDate inicioTratamiento;
     private LocalDate finPlazoSeguridad;
@@ -22,14 +23,16 @@ public class Tratamiento {
 
     }
 
-    public Tratamiento(long idCultivo,
-                       long idProducto,
-                       String numLoteProducto,
-                       LocalDate inicioTratamiento,
-                       LocalDate finPlazoSeguridad,
-                       LocalDate finPlazoNoRecoleccion) {
-        this.idCultivo = idCultivo;
-        this.idProducto = idProducto;
+    public Tratamiento(
+            Cultivo cultivo,
+            Producto producto,
+            String numLoteProducto,
+            LocalDate inicioTratamiento,
+            LocalDate finPlazoSeguridad,
+            LocalDate finPlazoNoRecoleccion
+    ) {
+        this.cultivo = cultivo;
+        this.producto = producto;
         this.numLoteProducto = numLoteProducto;
         this.inicioTratamiento = inicioTratamiento;
         this.finPlazoSeguridad = finPlazoSeguridad;
@@ -44,7 +47,7 @@ public class Tratamiento {
         this.idTratamiento = idTratamiento;
     }
 
-    public long getIdCultivo() {
+    /*public long getIdCultivo() {
         return idCultivo;
     }
 
@@ -58,6 +61,22 @@ public class Tratamiento {
 
     public void setIdProducto(long idProducto) {
         this.idProducto = idProducto;
+    }*/
+
+    public Cultivo getCultivo() {
+        return cultivo;
+    }
+
+    public void setCultivo(Cultivo cultivo) {
+        this.cultivo = cultivo;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
     public String getNumLoteProducto() {
@@ -91,10 +110,11 @@ public class Tratamiento {
     public void setFinPlazoNoRecoleccion(LocalDate finPlazoNoRecoleccion) {
         this.finPlazoNoRecoleccion = finPlazoNoRecoleccion;
     }
+
     public String toString() {
     	return "ID Tratamiento: "+this.idTratamiento+"\n"
-    			+ "ID cultivo:" + this.idCultivo + "\n"
-    			+ "ID producto:" + this.idProducto + "\n"
+    			+ "ID cultivo:" + this.cultivo + "\n"
+    			+ "ID producto:" + this.producto + "\n"
     			+ "Numero de lote del producto:" + this.numLoteProducto + "\n"
     			+ "Fecha de comienzo de tratamiento:" + this.inicioTratamiento + "\n"
     			+ "Fecha de fin de plazo de seguridad:" +  this.finPlazoSeguridad + "\n"

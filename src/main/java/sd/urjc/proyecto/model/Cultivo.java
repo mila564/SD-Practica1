@@ -19,7 +19,7 @@ public class Cultivo {
 	private String variedad;
 	private String zona;
 	private LocalDate fechaPlantacion;
-	@OneToMany
+	@OneToMany(mappedBy = "cultivo")
 	private List<Tratamiento> tratamientos;
 
 	
