@@ -1,12 +1,18 @@
 <html>
-	<body>
-		<p th:each="tratamiento: ${tratamientos}">
-			<a th:href="@{/tratamiento/{id}(id=${tratamiento.idTratamiento})}">
-				Tratamiento <span th:text="${tratamiento.idTratamiento}"</span> </a>
-		</p>
-		<p>
-			<br><br>
-			<a href="/tratamiento/formulario_crear">Crear nuevo tratamiento</a>
-		</p>
-	</body>
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<h2>Tratamientos</h2>
+	<p th:each="tratamiento: ${tratamientos}">
+		<a th:href="@{/tratamiento/{id}(id=${tratamiento.idTratamiento})}">
+			Tratamiento <span th:text="${tratamiento.idTratamiento}"></span>
+		</a>
+	</p>
+	<p>
+		<br>
+		<br> <a href="/tratamiento/formulario_crear">Añadir
+			tratamiento</a> <br> <a href="/"> Volver </a>
+	</p>
+</body>
 </html>
