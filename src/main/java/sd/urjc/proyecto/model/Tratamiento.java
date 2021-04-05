@@ -16,8 +16,8 @@ public class Tratamiento {
     private Producto producto;
     private String numLoteProducto;
     private LocalDate inicioTratamiento;
-    private LocalDate finPlazoSeguridad;
-    private LocalDate finPlazoNoRecoleccion;
+    private LocalDate finPlazoReentrada;
+    private LocalDate finPlazoRecoleccion;
 
     public Tratamiento() {
 
@@ -28,15 +28,15 @@ public class Tratamiento {
             Producto producto,
             String numLoteProducto,
             LocalDate inicioTratamiento,
-            LocalDate finPlazoSeguridad,
-            LocalDate finPlazoNoRecoleccion
+            LocalDate finPlazoReentrada,
+            LocalDate finPlazoRecoleccion
     ) {
         this.cultivo = cultivo;
         this.producto = producto;
         this.numLoteProducto = numLoteProducto;
         this.inicioTratamiento = inicioTratamiento;
-        this.finPlazoSeguridad = finPlazoSeguridad;
-        this.finPlazoNoRecoleccion = finPlazoNoRecoleccion;
+        this.finPlazoReentrada = finPlazoReentrada;
+        this.finPlazoRecoleccion = finPlazoRecoleccion;
     }
 
     public long getIdTratamiento() {
@@ -95,20 +95,20 @@ public class Tratamiento {
         this.inicioTratamiento = inicioTratamiento;
     }
 
-    public LocalDate getFinPlazoSeguridad() {
-        return finPlazoSeguridad;
+    public LocalDate getFinPlazoReentrada() {
+        return finPlazoReentrada;
     }
 
-    public void setFinPlazoSeguridad(LocalDate finPlazoSeguridad) {
-        this.finPlazoSeguridad = finPlazoSeguridad;
+    public void setFinPlazoReentrada(LocalDate finPlazoReentrada) {
+        this.finPlazoReentrada = finPlazoReentrada;
     }
 
-    public LocalDate getFinPlazoNoRecoleccion() {
-        return finPlazoNoRecoleccion;
+    public LocalDate getFinPlazoRecoleccion() {
+        return finPlazoRecoleccion;
     }
 
-    public void setFinPlazoNoRecoleccion(LocalDate finPlazoNoRecoleccion) {
-        this.finPlazoNoRecoleccion = finPlazoNoRecoleccion;
+    public void setFinPlazoRecoleccion(LocalDate finPlazoRecoleccion) {
+        this.finPlazoRecoleccion = finPlazoRecoleccion;
     }
 
     public String toString() {
@@ -117,7 +117,7 @@ public class Tratamiento {
     			+ "ID producto:" + this.producto + "\n"
     			+ "Numero de lote del producto:" + this.numLoteProducto + "\n"
     			+ "Fecha de comienzo de tratamiento:" + this.inicioTratamiento + "\n"
-    			+ "Fecha de fin de plazo de seguridad:" +  this.finPlazoSeguridad + "\n"
-    			+ "Fecha de fin de plazo de no recoleccion:" + this.finPlazoNoRecoleccion + "\n";
+    			+ "Fecha de fin de plazo de seguridad:" +  this.finPlazoReentrada + "\n"
+    			+ "Fecha de fin de plazo de no recoleccion:" + this.finPlazoRecoleccion + "\n";
     }
 }

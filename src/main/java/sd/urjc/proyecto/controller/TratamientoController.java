@@ -19,6 +19,7 @@ import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class TratamientoController {
@@ -284,8 +285,8 @@ public class TratamientoController {
         tratamientoMod.setProducto(producto);
         tratamientoMod.setNumLoteProducto(numLoteProducto);
         tratamientoMod.setInicioTratamiento(inicioTrat);
-        tratamientoMod.setFinPlazoSeguridad(finPlazoSeg);
-        tratamientoMod.setFinPlazoNoRecoleccion(finPlazoNoRec);
+        tratamientoMod.setFinPlazoReentrada(finPlazoSeg);
+        tratamientoMod.setFinPlazoRecoleccion(finPlazoNoRec);
         repTratamientos.save(tratamientoMod);
 
     	return "tratamientoModificado.html";
@@ -296,5 +297,20 @@ public class TratamientoController {
         Tratamiento tratamiento = repTratamientos.getOne(id);
         repTratamientos.deleteById(id);
         return "borradoConExito.html";
+    }
+
+    @RequestMapping("/tratamiento/filtro")
+    public String filtrarTratamientos(Model model, String fechaIntroducida) {
+        if(fechaIntroducida.equals("")) {
+            return "errorTratamiento.html";
+        }
+        LocalDate fechaFiltrado = LocalDate.parse(fechaIntroducida);
+        List<Tratamiento> tratamientos = repTratamientos.findAll();
+        tratamientos = tratamientos.stream().filter(
+                tratamiento -> fechaFiltrado.isBefore(tratamiento.getFinPlazoReentrada())
+                || fechaFiltrado.isBefore(tratamiento.getFinPlazoRecoleccion())
+        ).collect(Collectors.toList());
+        model.addAttribute("tratamientos", tratamientos);
+        return "tratamientos.html";
     }
 }

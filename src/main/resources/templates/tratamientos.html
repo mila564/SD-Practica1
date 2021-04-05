@@ -1,9 +1,16 @@
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
 </head>
 <body>
 	<h2>Tratamientos</h2>
+	<p>Filtrar tratamientos por fecha:</p>
+	<br>
+	<form action="/tratamiento/filtro" method="post">
+		<input type="date" name="fechaIntroducida">
+		<input type="submit" value="Filtrar">
+	</form>
+	<br>
 	<p th:each="tratamiento: ${tratamientos}">
 		<a th:href="@{/tratamiento/{id}(id=${tratamiento.idTratamiento})}">
 			Tratamiento <span th:text="${tratamiento.idTratamiento}"></span>
