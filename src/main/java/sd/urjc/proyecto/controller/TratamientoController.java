@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fasterxml.jackson.databind.ser.std.StdArraySerializers.LongArraySerializer;
-
 import sd.urjc.proyecto.model.Cultivo;
 import sd.urjc.proyecto.model.Producto;
 import sd.urjc.proyecto.model.Tratamiento;
@@ -20,23 +18,155 @@ import javax.annotation.PostConstruct;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class TratamientoController {
 
     @Autowired
-    TratamientoRepository tratamientoRepository;
+    TratamientoRepository repTratamientos;
     @Autowired
-    CultivoRepository cultivoRepository;
+    CultivoRepository repCultivos;
     @Autowired
-    ProductoRepository productoRepository;
+    ProductoRepository repProductos;
 
-    /*@PostConstruct
+    @PostConstruct
     public void init() {
-        tratamientoRepository.save(new Tratamiento());
-    }*/
+        Producto producto;
+        Cultivo cultivo;
+        LocalDate fecha;
+
+        // Los tres primeros tratamientos se aplicaron en la misma fecha
+        // y sobre el mismo cultivo
+        cultivo = repCultivos.findByNombre("Tomate");
+        fecha = LocalDate.parse("2020-09-20");
+
+        producto = repProductos.findByNombre("Microtox");
+        repTratamientos.save(new Tratamiento(
+            cultivo,
+            producto,
+            "H8486688",
+            fecha,
+            fecha.plusDays(
+                producto.getPlazoReentrada()
+            ),
+            fecha.plusDays(
+                producto.getPlazoRecoleccion()
+            )
+        ));
+
+        producto = repProductos.findByNombre("Captana");
+        repTratamientos.save(new Tratamiento(
+                cultivo,
+                producto,
+                "F4593876",
+                fecha,
+                fecha.plusDays(
+                        producto.getPlazoReentrada()
+                ),
+                fecha.plusDays(
+                        producto.getPlazoRecoleccion()
+                )
+        ));
+
+        producto = repProductos.findByNombre("Fruitel");
+        repTratamientos.save(new Tratamiento(
+                cultivo,
+                producto,
+                "A0245872",
+                fecha,
+                fecha.plusDays(
+                        producto.getPlazoReentrada()
+                ),
+                fecha.plusDays(
+                        producto.getPlazoRecoleccion()
+                )
+        ));
+
+        // Dos tratamientos sobre el mismo cultivo pero lo demás diferente
+        cultivo = repCultivos.findByNombre("Alcachofa");
+
+        producto = repProductos.findByNombre("Adrex");
+        fecha = LocalDate.parse("2021-02-15");
+        repTratamientos.save(new Tratamiento(
+                cultivo,
+                producto,
+                "G7834097",
+                fecha,
+                fecha.plusDays(
+                        producto.getPlazoReentrada()
+                ),
+                fecha.plusDays(
+                        producto.getPlazoRecoleccion()
+                )
+        ));
+
+        producto = repProductos.findByNombre("Microtox");
+        fecha = LocalDate.parse("2021-03-11");
+        repTratamientos.save(new Tratamiento(
+            cultivo,
+            producto,
+            "I9873597",
+            fecha,
+            fecha.plusDays(
+                producto.getPlazoReentrada()
+            ),
+            fecha.plusDays(
+                producto.getPlazoRecoleccion()
+            )
+        ));
+
+        // Un solo tratamiento ambos plazos
+        producto = repProductos.findByNombre("Captana");
+        cultivo = repCultivos.findByNombre("Manzana");
+        fecha = LocalDate.parse("2019-07-06");
+        repTratamientos.save(new Tratamiento(
+                cultivo,
+                producto,
+                "U5430894",
+                fecha,
+                fecha.plusDays(
+                        producto.getPlazoReentrada()
+                ),
+                fecha.plusDays(
+                        producto.getPlazoRecoleccion()
+                )
+        ));
+
+        // Un solo tratamiento sin plazo de reentrada
+        producto = repProductos.findByNombre("Fruitel");
+        cultivo = repCultivos.findByNombre("Cereza");
+        fecha = LocalDate.parse("2020-03-21");
+        repTratamientos.save(new Tratamiento(
+                cultivo,
+                producto,
+                "Y0387508",
+                fecha,
+                fecha.plusDays(
+                        producto.getPlazoReentrada()
+                ),
+                fecha.plusDays(
+                        producto.getPlazoRecoleccion()
+                )
+        ));
+
+        // Un solo tratamiento sin ningún plazo
+        producto = repProductos.findByNombre("Poltix");
+        cultivo = repCultivos.findByNombre("Cebolla");
+        fecha = LocalDate.parse("2020-10-28");
+        repTratamientos.save(new Tratamiento(
+                cultivo,
+                producto,
+                "S0823472",
+                fecha,
+                fecha.plusDays(
+                        producto.getPlazoReentrada()
+                ),
+                fecha.plusDays(
+                        producto.getPlazoRecoleccion()
+                )
+        ));
+    }
 
     @RequestMapping(value="/tratamiento/crear")
     public String crearTramiento(
@@ -59,12 +189,12 @@ public class TratamientoController {
         LocalDate inicioTrat = LocalDate.parse(inicioTratamiento, formatter);
 
         // Cálculo de fechas de fin de plazos
-        Producto producto = productoRepository.getOne(idProductoNum);
+        Producto producto = repProductos.getOne(idProductoNum);
     	LocalDate finPlazoSeg = inicioTrat.plusDays(producto.getPlazoReentrada());;
     	LocalDate finPlazoNoRec = inicioTrat.plusDays(producto.getPlazoRecoleccion());;
 
         // Creación del tratamiento
-        Cultivo cultivo = cultivoRepository.getOne(idCultivoNum);
+        Cultivo cultivo = repCultivos.getOne(idCultivoNum);
         Tratamiento tratamiento = new Tratamiento(
                 cultivo,
                 producto,
@@ -73,15 +203,15 @@ public class TratamientoController {
                 finPlazoSeg,
                 finPlazoNoRec
         );
-        tratamientoRepository.save(tratamiento);
+        repTratamientos.save(tratamiento);
 
         return "tratamientoCreado.html";
     }
 
     @RequestMapping(value="/tratamiento/formulario_crear")
     public String formularioCrearTratamiento(Model model) {
-        List<Cultivo> listaCultivos = cultivoRepository.findAll();
-        List<Producto> listaProductos = productoRepository.findAll();
+        List<Cultivo> listaCultivos = repCultivos.findAll();
+        List<Producto> listaProductos = repProductos.findAll();
         model.addAttribute("cultivos", listaCultivos);
         model.addAttribute("productos", listaProductos);
         return "crearTratamiento.html";
@@ -89,7 +219,7 @@ public class TratamientoController {
 
     @RequestMapping("/tratamiento/{id}")
     public String mostrarTratamiento(@PathVariable long id, Model model) {
-        Tratamiento tratamiento = tratamientoRepository.getOne(id);
+        Tratamiento tratamiento = repTratamientos.getOne(id);
         Cultivo cultivo = tratamiento.getCultivo();
         Producto producto = tratamiento.getProducto();
         model.addAttribute("tratamiento", tratamiento);
@@ -100,18 +230,18 @@ public class TratamientoController {
 
     @RequestMapping("/tratamiento")
     public String tratamientos(Model model) {
-    	List<Tratamiento> listaTratamientos = tratamientoRepository.findAll();
+    	List<Tratamiento> listaTratamientos = repTratamientos.findAll();
     	model.addAttribute("tratamientos", listaTratamientos);
     	return"tratamientos.html";
     }
 
     @RequestMapping("/tratamiento/modificar/{id}")
     public String modificarFormularioTratamiento(@PathVariable long id, Model model) {
-    	Tratamiento tratamiento = tratamientoRepository.getOne(id);
+    	Tratamiento tratamiento = repTratamientos.getOne(id);
     	Cultivo cultivo = tratamiento.getCultivo();
     	Producto producto = tratamiento.getProducto();
-        List<Cultivo> listaCultivos = cultivoRepository.findAll();
-        List<Producto> listaProductos = productoRepository.findAll();
+        List<Cultivo> listaCultivos = repCultivos.findAll();
+        List<Producto> listaProductos = repProductos.findAll();
     	model.addAttribute("tratamientoOriginal", tratamiento);
     	model.addAttribute("cultivoOriginal", cultivo);
     	model.addAttribute("productoOriginal", producto);
@@ -143,28 +273,28 @@ public class TratamientoController {
         LocalDate inicioTrat = LocalDate.parse(inicioTratamiento, formatter);
 
         // Cálculo de fechas de fin de plazos
-        Producto producto = productoRepository.getOne(idProductoNum);
+        Producto producto = repProductos.getOne(idProductoNum);
         LocalDate finPlazoSeg = inicioTrat.plusDays(producto.getPlazoReentrada());
         LocalDate finPlazoNoRec = inicioTrat.plusDays(producto.getPlazoRecoleccion());
 
         // Modificación del tratamiento
-        Cultivo cultivo = cultivoRepository.getOne(idCultivoNum);
-        Tratamiento tratamientoMod = tratamientoRepository.getOne(idTratamiento);
+        Cultivo cultivo = repCultivos.getOne(idCultivoNum);
+        Tratamiento tratamientoMod = repTratamientos.getOne(idTratamiento);
         tratamientoMod.setCultivo(cultivo);
         tratamientoMod.setProducto(producto);
         tratamientoMod.setNumLoteProducto(numLoteProducto);
         tratamientoMod.setInicioTratamiento(inicioTrat);
         tratamientoMod.setFinPlazoSeguridad(finPlazoSeg);
         tratamientoMod.setFinPlazoNoRecoleccion(finPlazoNoRec);
-        tratamientoRepository.save(tratamientoMod);
+        repTratamientos.save(tratamientoMod);
 
     	return "tratamientoModificado.html";
     }
 
     @RequestMapping("/tratamiento/borrar/{id}")
     public String borrar(@PathVariable long id) {
-        Tratamiento tratamiento = tratamientoRepository.getOne(id);
-        tratamientoRepository.deleteById(id);
+        Tratamiento tratamiento = repTratamientos.getOne(id);
+        repTratamientos.deleteById(id);
         return "borradoConExito.html";
     }
 }

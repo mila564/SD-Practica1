@@ -10,6 +10,6 @@ import sd.urjc.proyecto.model.Cultivo;
 @Service
 public interface CultivoRepository extends JpaRepository<Cultivo, Long>{
 	Optional<Cultivo> findById (long id);
-	
+	Cultivo findByNombre(String nombre);
 	
 }

@@ -10,5 +10,5 @@ import sd.urjc.proyecto.model.Producto;
 @Service
 public interface ProductoRepository extends JpaRepository<Producto, Long>{
 	Optional<Producto> findById (long id);
-	
+	Producto findByNombre(String nombre);
 }

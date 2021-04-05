@@ -30,17 +30,19 @@ public class CultivoController {
 	@PostConstruct
 	public void init() {
 		repCultivos.save(new Cultivo("Tomate", "Cherry", "Valencia", LocalDate.parse("2020-06-27"), new ArrayList<>()));
-		repCultivos.save(new Cultivo("Cerezo", "Lapins","Valle del Jerte",LocalDate.parse("2020-02-17"), new ArrayList<>()));
+		repCultivos.save(new Cultivo("Cereza", "Lapins","Valle del Jerte",LocalDate.parse("2020-02-17"), new ArrayList<>()));
 		repCultivos.save(new Cultivo("Cebolla", "Calcots","Barcelona", LocalDate.parse("2020-05-21"), new ArrayList<>()));
+		repCultivos.save(new Cultivo("Manzana", "Reineta", "Taramundi", LocalDate.parse("2019-03-17"), new ArrayList<>()));
+		repCultivos.save(new Cultivo("Alcachofa", "Blanca", "Tudela", LocalDate.parse("2021-01-24"), new ArrayList<>()));
+		repCultivos.save(new Cultivo("Melocotón", "Nectarina", "Gales", LocalDate.parse("2020-09-27"), new ArrayList<>()));
 	}
-	
 
 	@RequestMapping("/cultivos")
 	public String mostrarCultivos (Model model) {
 		model.addAttribute("cultivos", repCultivos.findAll());
 		return "cultivos";
 	}
-		
+
 	@RequestMapping("/cultivos/nuevoCultivo")
 	public String añadirCultivo (@RequestParam String nombre,
 			@RequestParam String variedad,
