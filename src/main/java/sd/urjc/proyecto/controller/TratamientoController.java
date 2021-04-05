@@ -52,21 +52,22 @@ public class TratamientoController {
     		return "errorTratamiento.html";
     	}
 
-    	LocalDate inicioTrat;
-    	LocalDate finPlazoSeg;
-    	LocalDate finPlazoNoRec;
+        // Parseo de IDs y fecha inicial
         long idCultivoNum = Long.parseLong(idCultivo);
         long idProductoNum= Long.parseLong(idProducto);
-        Producto producto = productoRepository.getOne(idProductoNum);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate inicioTrat = LocalDate.parse(inicioTratamiento, formatter);
 
-    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    	inicioTrat = LocalDate.parse(inicioTratamiento, formatter);
-    	finPlazoSeg = inicioTrat.plusDays(producto.getPlazoReentrada());
-    	finPlazoNoRec = inicioTrat.plusDays(producto.getPlazoRecoleccion());
-    
-    	Tratamiento tratamiento = new Tratamiento(
-    	        idCultivoNum,
-                idProductoNum,
+        // Cálculo de fechas de fin de plazos
+        Producto producto = productoRepository.getOne(idProductoNum);
+    	LocalDate finPlazoSeg = inicioTrat.plusDays(producto.getPlazoReentrada());;
+    	LocalDate finPlazoNoRec = inicioTrat.plusDays(producto.getPlazoRecoleccion());;
+
+        // Creación del tratamiento
+        Cultivo cultivo = cultivoRepository.getOne(idCultivoNum);
+        Tratamiento tratamiento = new Tratamiento(
+                cultivo,
+                producto,
                 numLoteProducto,
                 inicioTrat,
                 finPlazoSeg,
@@ -74,10 +75,6 @@ public class TratamientoController {
         );
         tratamientoRepository.save(tratamiento);
 
-        Cultivo cultivo = cultivoRepository.getOne(idCultivoNum);
-        List<Tratamiento> tratamientos = cultivo.getTratamientos();
-        tratamientos.add(tratamiento);
-        cultivoRepository.save(cultivo);
         return "tratamientoCreado.html";
     }
 
@@ -93,8 +90,8 @@ public class TratamientoController {
     @RequestMapping("/tratamiento/{id}")
     public String mostrarTratamiento(@PathVariable long id, Model model) {
         Tratamiento tratamiento = tratamientoRepository.getOne(id);
-        Cultivo cultivo = cultivoRepository.getOne(tratamiento.getIdCultivo());
-        Producto producto = productoRepository.getOne(tratamiento.getIdProducto());
+        Cultivo cultivo = tratamiento.getCultivo();
+        Producto producto = tratamiento.getProducto();
         model.addAttribute("tratamiento", tratamiento);
         model.addAttribute("cultivo", cultivo);
         model.addAttribute("producto", producto);
@@ -111,10 +108,8 @@ public class TratamientoController {
     @RequestMapping("/tratamiento/modificar/{id}")
     public String modificarFormularioTratamiento(@PathVariable long id, Model model) {
     	Tratamiento tratamiento = tratamientoRepository.getOne(id);
-    	long idCultivo = tratamiento.getIdCultivo();
-    	long idProducto = tratamiento.getIdProducto();
-    	Cultivo cultivo = cultivoRepository.getOne(idCultivo);
-    	Producto producto = productoRepository.getOne(idProducto);
+    	Cultivo cultivo = tratamiento.getCultivo();
+    	Producto producto = tratamiento.getProducto();
         List<Cultivo> listaCultivos = cultivoRepository.findAll();
         List<Producto> listaProductos = productoRepository.findAll();
     	model.addAttribute("tratamientoOriginal", tratamiento);
@@ -141,15 +136,6 @@ public class TratamientoController {
             return "errorTratamiento.html";
         }
 
-        // Actualización de la lista de tratamientos del cultivo del tratamiento original
-        Tratamiento tratamientoOriginal = tratamientoRepository.getOne(idTratamiento);
-        Cultivo cultivoOriginal = cultivoRepository.getOne(
-                tratamientoOriginal.getIdCultivo()
-        );
-        List<Tratamiento> tratamientosCultOrig = cultivoOriginal.getTratamientos();
-        tratamientosCultOrig.remove(tratamientoOriginal);
-        cultivoRepository.save(cultivoOriginal);
-
         // Parseo de IDs y fecha inicial
         long idCultivoNum = Long.parseLong(idCultivo);
         long idProductoNum= Long.parseLong(idProducto);
@@ -162,21 +148,15 @@ public class TratamientoController {
         LocalDate finPlazoNoRec = inicioTrat.plusDays(producto.getPlazoRecoleccion());
 
         // Modificación del tratamiento
+        Cultivo cultivo = cultivoRepository.getOne(idCultivoNum);
         Tratamiento tratamientoMod = tratamientoRepository.getOne(idTratamiento);
-        tratamientoMod.setIdCultivo(idCultivoNum);
-        tratamientoMod.setIdProducto(idProductoNum);
+        tratamientoMod.setCultivo(cultivo);
+        tratamientoMod.setProducto(producto);
         tratamientoMod.setNumLoteProducto(numLoteProducto);
         tratamientoMod.setInicioTratamiento(inicioTrat);
         tratamientoMod.setFinPlazoSeguridad(finPlazoSeg);
         tratamientoMod.setFinPlazoNoRecoleccion(finPlazoNoRec);
         tratamientoRepository.save(tratamientoMod);
-
-        // Guardar el tratamiento modificado en la lista del cultivo del
-        // tratamiento modificado
-        Cultivo cultivoMod = cultivoRepository.getOne(idCultivoNum);
-        List<Tratamiento> tratamientosCultMod = cultivoMod.getTratamientos();
-        tratamientosCultMod.add(tratamientoMod);
-        cultivoRepository.save(cultivoMod);
 
     	return "tratamientoModificado.html";
     }
@@ -184,13 +164,6 @@ public class TratamientoController {
     @RequestMapping("/tratamiento/borrar/{id}")
     public String borrar(@PathVariable long id) {
         Tratamiento tratamiento = tratamientoRepository.getOne(id);
-        Cultivo cultivo = cultivoRepository.getOne(
-                tratamiento.getIdCultivo()
-        );
-        List<Tratamiento> tratamientos = cultivo.getTratamientos();
-        tratamientos.remove(tratamiento);
-
-        cultivoRepository.save(cultivo);
         tratamientoRepository.deleteById(id);
         return "borradoConExito.html";
     }
