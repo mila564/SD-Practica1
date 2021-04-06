@@ -18,8 +18,10 @@ import javax.annotation.PostConstruct;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 public class TratamientoController {
@@ -300,17 +302,41 @@ public class TratamientoController {
     }
 
     @RequestMapping("/tratamiento/filtro")
-    public String filtrarTratamientos(Model model, String fechaIntroducida) {
-        if(fechaIntroducida.equals("")) {
-            return "errorTratamiento.html";
+    public String filtrarTratamientos(Model model, String fechaIntroducida, String orden) {
+    	Stream<Tratamiento> tratamientos;
+    	
+    	//Tratamiento de error
+    	if(orden.equals("") && fechaIntroducida.equals("")) {
+        	return "errorTratamiento.html";
         }
-        LocalDate fechaFiltrado = LocalDate.parse(fechaIntroducida);
-        List<Tratamiento> tratamientos = repTratamientos.findAll();
-        tratamientos = tratamientos.stream().filter(
-                tratamiento -> fechaFiltrado.isBefore(tratamiento.getFinPlazoReentrada())
-                || fechaFiltrado.isBefore(tratamiento.getFinPlazoRecoleccion())
-        ).collect(Collectors.toList());
-        model.addAttribute("tratamientos", tratamientos);
+    	
+    	tratamientos = repTratamientos.findAll().stream();
+    	
+    	//filtrado por fecha
+        if(!fechaIntroducida.equals("")) {
+        	LocalDate fechaFiltrado = LocalDate.parse(fechaIntroducida);
+            tratamientos = tratamientos.filter(
+                    tratamiento -> fechaFiltrado.isBefore(tratamiento.getFinPlazoReentrada())
+                    || fechaFiltrado.isBefore(tratamiento.getFinPlazoRecoleccion())
+            );
+        }
+        
+        //orden
+        if(!orden.equals("")) {
+        	switch(orden) {
+        		case "especie":
+        			tratamientos = tratamientos.sorted(Comparator.comparing(t -> t.getCultivo().getNombre()));
+        			break;
+        		case "fechaReentrada":
+        			tratamientos = tratamientos.sorted(Comparator.comparing(t -> t.getFinPlazoReentrada()));
+        			break;
+        		case "fechaRecoleccion":
+        			tratamientos = tratamientos.sorted(Comparator.comparing(t -> t.getFinPlazoRecoleccion()));
+        			break;
+        	}
+        }
+        
+        model.addAttribute("tratamientos", tratamientos.collect(Collectors.toList()));
         return "tratamientos.html";
     }
 }

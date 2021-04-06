@@ -47,21 +47,6 @@ public class Tratamiento {
         this.idTratamiento = idTratamiento;
     }
 
-    /*public long getIdCultivo() {
-        return idCultivo;
-    }
-
-    public void setIdCultivo(long idCultivo) {
-        this.idCultivo = idCultivo;
-    }
-
-    public long getIdProducto() {
-        return idProducto;
-    }
-
-    public void setIdProducto(long idProducto) {
-        this.idProducto = idProducto;
-    }*/
 
     public Cultivo getCultivo() {
         return cultivo;
