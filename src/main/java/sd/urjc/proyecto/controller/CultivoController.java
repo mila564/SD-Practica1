@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import sd.urjc.proyecto.model.Cultivo;
+import sd.urjc.proyecto.model.Producto;
 import sd.urjc.proyecto.repository.CultivoRepository;
 import sd.urjc.proyecto.repository.TratamientoRepository;
 
@@ -113,10 +114,15 @@ public class CultivoController {
 	 
 	 @RequestMapping("/cultivos/borrar/{id}")
 	public String borrarCultivo(@PathVariable long id, Model model){
-		 Cultivo cultivo = repCultivos.getOne(id);
-		 // model.addAttribute("cultivo", cultivo);
-		 repCultivos.delete(cultivo);
-	     return "borrado_cultivo";
+			Optional<Cultivo> opt= repCultivos.findById(id);
+			if (opt.isPresent()) {
+				repTratamientos.deleteByCultivo(opt.get());
+				repCultivos.delete(opt.get());
+				return "borrado_cultivo";
+			}
+			else {
+				return "cultivos";	
+			}
 		
 	}
 	

@@ -306,8 +306,8 @@ public class TratamientoController {
     	Stream<Tratamiento> tratamientos;
     	
     	//Tratamiento de error
-    	if(orden.equals("") && fechaIntroducida.equals("")) {
-        	return "errorTratamiento.html";
+    	if((orden == null) && fechaIntroducida.equals("")) {
+        	return "errorFiltrarTratamiento.html";
         }
     	
     	tratamientos = repTratamientos.findAll().stream();

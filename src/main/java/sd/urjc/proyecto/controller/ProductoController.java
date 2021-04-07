@@ -2,21 +2,27 @@ package sd.urjc.proyecto.controller;
 
 import javax.annotation.PostConstruct;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import sd.urjc.proyecto.model.Producto;
+import sd.urjc.proyecto.model.Tratamiento;
 import sd.urjc.proyecto.repository.ProductoRepository;
+import sd.urjc.proyecto.repository.TratamientoRepository;
 
 @Controller
 public class ProductoController {
 
 	@Autowired
 	private ProductoRepository repProductos;
+	@Autowired
+	private TratamientoRepository repTratamientos;
 	
 	@PostConstruct
 	public void init() {
@@ -98,6 +104,7 @@ public class ProductoController {
 			Model model){
 		Optional<Producto> opt= repProductos.findById(Long.parseLong(id));
 		if (opt.isPresent()) {
+			repTratamientos.deleteByProducto(opt.get());
 			repProductos.delete(opt.get());
 			return "borrado_producto";
 		}
