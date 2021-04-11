@@ -1,13 +1,18 @@
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+  
     <meta charset="UTF-8">
-    <title>Nuevo tratamiento</title>
+    <link rel="stylesheet" th:href="@{/css/modificar.css}"/>
 </head>
 <body>
-    <h1>Introduzca los datos del tratamiento</h1>
-    <form th:action="@{/tratamiento/modificar-objeto/{id}(id=${tratamientoOriginal.idTratamiento})}" method="post">
-        Indique a que cultivo se le aplicó el tratamiento:
+    <div id="container_tratamiento">
+    <header>
+			
+        <h1><img id="icono" th:src="@{/imagenes/heart.png}"> Gestión agrícola:  Modificar tratamiento</h1>
+    </header>
+    <div id="fondo_formulario">
+    <form id="form" th:action="@{/tratamiento/modificar-objeto/{id}(id=${tratamientoOriginal.idTratamiento})}" method="post">
+        <p>Introduce cultivo</p>
         <p>
             <select name="idCultivo">
                 <option selected th:text="${cultivoOriginal.nombre}" th:value="${cultivoOriginal.id}"></option>
@@ -15,19 +20,20 @@
             </select>
         </p>
         <p>
+        <p>Introduce producto</p> <br>
             <select name="idProducto">
             	<option selected th:text="${productoOriginal.nombre}" th:value="${productoOriginal.id}"></option>
                 <option th:each="producto : ${productos}" th:text="${producto.nombre}" th:value="${producto.id}" value="producto"></option>
             </select>
         </p>
-        <br>
-        Número del lote del producto utilizado:
-        <input type="text" name="numLoteProducto" size="32" th:value="${tratamientoOriginal.numLoteProducto}"><br>
-        Fecha de inicio del tratamiento:
+        <p>Número del lote del producto</p>
+        <input type="text" name="numLoteProducto" size="20" th:value="${tratamientoOriginal.numLoteProducto}"><br><br>
+        <p>Fecha de inicio del tratamiento</p>
         <input type="date" name="inicioTratamiento" th:value="${tratamientoOriginal.inicioTratamiento}"><br>
         <br>
-        <input type="submit" value="Modificar"/>
-        <br>
+        <input CLASS="button" type="submit" value="Modificar"/>
     </form>
+    </div>
+</div>
 </body>
 </html>

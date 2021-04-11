@@ -1,18 +1,31 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
+<link rel="stylesheet" th:href="@{/css/modificar.css}"/>
 </head>
 <body>
-	<form th:action="@{/productos/editar/{id}(id=${producto.id})}" method="post">
-		<p>Nombre:</p>
-		<input type="text" name="nombre" th:value="${producto.nombre}"> <br>
-		<p>Descripción:</p>
-		<textarea name="descripcion" rows="4" cols="30" th:field="*{producto.descripcion}"></textarea> <br>
-		<p>Plazo de reentrada:</p>
-		<input type="number" name="plazoReentrada" th:value="${producto.plazoReentrada}"> <br>
-		<p>Plazo de recolección:</p>
-		<input type="number" name="plazoRecoleccion" th:value="${producto.plazoRecoleccion}"> <br> <br>
-		<input type="submit" value="Modificar producto"> <br>
-	</form>
+	
+	<div id="container_producto">
+		
+		<header>
+			
+			<h1><img id="icono" th:src="@{/imagenes/heart.png}"> Gestión agrícola:  Modificar producto</h1>
+		</header>
+		<div id="fondo_formulario">
+		<div id="form">
+			<form th:action="@{/productos/editar/{id}(id=${producto.id})}" method="post">
+			<p>Nombre:</p>
+			<input type="text" name="nombre" th:value="${producto.nombre}"> <br>
+			<p>Descripción:</p>
+			<textarea name="descripcion" rows="3" cols="25" th:field="*{producto.descripcion}"></textarea> <br>
+			<p>Plazo de reentrada:</p>
+			<input type="number" name="plazoReentrada" th:value="${producto.plazoReentrada}"> <br>
+			<p>Plazo de recolección:</p>
+			<input type="number" name="plazoRecoleccion" th:value="${producto.plazoRecoleccion}"> <br> <br>
+			<input CLASS="button" type="submit" value="Modificar producto"> <br>
+		</form>
+		</div>
+		</div>
+	</div>
 </body>
 </html>
