@@ -1,0 +1,72 @@
+body{	
+	font-family:"Times New Roman";
+	padding: 0px;
+	margin: 0px;
+}
+header{
+	background: #34773B;
+	color: #CFDA9C;
+	padding-bottom: 5px;
+	height: 70px;
+	line-height: 70px;
+	text-indent: 20px;
+	text-shadow: 3px 3px black;
+	font-size: 20px;
+	width: 100%;
+}
+#icono{
+	height: 35px;
+	width: 35px;
+	margin-top: 10px;
+}
+#container_producto{
+	background-image: url("../imagenes/hojas.jpg");
+	width:100%;
+	height:100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-attachment: fixed;
+	background-size: cover;
+	overflow-x:hidden;
+    overflow-y:hidden;
+}
+#container_cultivo{
+	background-image: url("../imagenes/naturaleza.jpg");
+	width:100%;
+	height:100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-attachment: fixed;
+	background-size: cover;
+	overflow-x:hidden;
+    overflow-y:hidden;
+}
+#container_tratamiento{
+	background-image: url("../imagenes/sol.jpg");
+	width:100%;
+	height:100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-attachment: fixed;
+	background-size: cover;
+	overflow-x:hidden;
+    overflow-y:hidden;
+}
+p{
+	font-size: 25px;
+	padding-bottom: 5px;
+	padding-top: 1px;
+	border-radius: 10px;
+	width:360px;
+	height: 150px;
+	margin: 60px auto;
+	background: rgba(255,255,255,0.7);
+	text-align: center;
+	line-height: 3em;
+}
+h1{
+	margin: 0px 0px 0px 0px;
+}
+a:link, a:visited {
+	font-size:22px;
+}
