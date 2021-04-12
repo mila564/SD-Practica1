@@ -1,21 +1,32 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset = "UTF-8"/>
+		<link rel="stylesheet" th:href="@{/css/mostrar.css}"/>
 	</head>
 	<body>
-	<h1>Datos del tratamiento</h1>
-		<p>Tratamiento ID: <span th:text="${tratamiento.idTratamiento}">. </span></p>
+		<div id="container_tratamiento">
+		<header>
+		<h1><img id="icono" th:src="@{/imagenes/heart.png}"> Gestión agrícola:  Tratamiento</h1>
+		</header>
+		<div id="fondo">
+		<form id="form1">
+		<h3>Tratamiento ID: <span th:text="${tratamiento.idTratamiento}">. </span></h3>
 		<p>Cultivo: <span th:text="${cultivo.nombre}">. </span></p>
 		<p>Producto: <span th:text="${producto.nombre}">. </span></p>
 		<p>Numero de lote de producto: <span th:text="${tratamiento.numLoteProducto}">. </span></p>
 		<p>Fecha de inicio del tratamiento: <span th:text="${tratamiento.inicioTratamiento}">. </span></p>
 		<p>Fecha de fin del plazo de reentrada: <span th:text="${tratamiento.finPlazoReentrada}">. </span><p>
 		<p>Fecha de fin del plazo de recolección: <span th:text="${tratamiento.finPlazoRecoleccion}">. </span></p>
-		<br>
-		<br>
-		<a th:href="@{/tratamiento/modificar/{id}(id=${tratamiento.idTratamiento})}">Editar</a>
-		<br>
-		<a th:href="@{/tratamiento/borrar/{id}(id=${tratamiento.idTratamiento})}">Borrar</a>
-		<br>
+		<br />
+		<br />
+		<a CLASS="button" th:href="@{/tratamiento/modificar/{id}(id=${tratamiento.idTratamiento})}"> Editar </a>	
+		<br />
+		<br />
+		<a CLASS="button" th:href="@{/tratamiento/borrar/{id}(id=${tratamiento.idTratamiento})}"> Borrar </a>
+		<br />
+		</form>
+	
+	</div>
+</div>	
 	</body>
 </html>

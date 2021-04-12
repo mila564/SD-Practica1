@@ -1,21 +1,44 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
+<link rel="stylesheet" th:href="@{/css/mostrar.css}"/>
 </head>
 <body>
-	<h2>Producto:</h2>
-	<span th:text="'Nombre: ' + ${producto.nombre}"></span>
+	<div id="container_producto">
+	<header>
+			
+		<h1><img id="icono" th:src="@{/imagenes/heart.png}"> Gestión agrícola:  Producto</h1>
+	</header>
+	<div id="fondo_producto">
+	<form id="form1">
+	
+	<h3 th:text="'Nombre: ' + ${producto.nombre}"></h3>
 	<br />
-	<span th:text="'Descripción: '+ ${producto.descripcion}"></span>
+	
+	
+	<span th:text="'Descripción: '"></span>	
+	<br />
+	
+	<span th:text="${producto.descripcion}"></span>
+	<br />
 	<br />
 	<span th:text="'Plazo de reentrada: '+ ${producto.plazoReentrada}"></span>
 	<br />
+	<br />
 	<span th:text="'Plazo de recolección: '+ ${producto.plazoRecoleccion}"></span>
 	<br />
+	
 	<br />
-	<a th:href="@{/productos/modificar/{id}(id=${producto.id})}"> Editar </a>	
 	<br />
-	<a th:href="@{/productos/borrar/{id}(id=${producto.id})}"> Borrar </a>
-	<br />		
+	<a CLASS="button" th:href="@{/productos/modificar/{id}(id=${producto.id})}"> Editar </a>	
+	<br />
+	<br />
+	<a CLASS="button" th:href="@{/productos/borrar/{id}(id=${producto.id})}"> Borrar </a>
+	<br />
+	
+	
+		
+</body>
+</div>		
 </body>
 </html>

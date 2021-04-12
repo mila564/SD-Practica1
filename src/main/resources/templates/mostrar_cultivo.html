@@ -1,29 +1,44 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
+<link rel="stylesheet" th:href="@{/css/mostrar.css}"/>
 </head>
 <body>
-	<h2>Cultivo:</h2>
-	<span th:text="'Nombre: ' + ${cultivo.nombre}"></span>
+	<div id="container_cultivo">
+	<header>
+			
+		<h1><img id="icono" th:src="@{/imagenes/heart.png}"> Gestión agrícola:  Cultivo</h1>
+	</header>
+	<div id="fondo">
+	<form id="form1">
+	<h3 th:text="'Nombre: ' + ${cultivo.nombre}"></h3>
 	<br />
+	
 	<span th:text="'Variedad: '+ ${cultivo.variedad}"></span>
 	<br />
-	<span th:text="'Zona: '+ ${cultivo.zona}"></span>
+	<p th:text="'Zona: '+ ${cultivo.zona}"></p>
+	
+	<span th:text="'Fecha de plantacion: '"></span>
 	<br />
-	<span th:text="'Fecha de plantacion: '+ ${cultivo.fechaPlantacion}"></span>
+	<span th:text="${cultivo.fechaPlantacion}"></span>
 	<br />
-	<span>Tratamientos: </span>
-	<br>
+	<p>Tratamientos: </p>
+	
 	<p th:each= "tratamiento : ${cultivo.tratamientos}">
-		<a th:href="@{/tratamiento/{id}(id=${tratamiento.idTratamiento})}">
+		<a CLASS="bottonTratamiento" th:href="@{/tratamiento/{id}(id=${tratamiento.idTratamiento})}">
 		<span th:text="'Tratamiento '+ ${tratamiento.idTratamiento}"></span>
 		</a>
 	</p>
-	<br>
 	<br />
-	<a th:href="@{/cultivos/modificar/{id}(id=${cultivo.id})}"> Editar </a>	
 	<br />
-	<a th:href="@{/cultivos/borrar/{id}(id=${cultivo.id})}"> Borrar </a>
-	<br />		
+	<a CLASS="button" th:href="@{/cultivos/modificar/{id}(id=${cultivo.id})}"> Editar </a>	
+	<br />
+	<br />
+	<a CLASS="button" th:href="@{/cultivos/borrar/{id}(id=${cultivo.id})}"> Borrar </a>
+	<br />
+	</form>
+	
+	</div>
+</div>		
 </body>
 </html>
