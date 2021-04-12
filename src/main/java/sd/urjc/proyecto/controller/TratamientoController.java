@@ -182,7 +182,7 @@ public class TratamientoController {
     	        inicioTratamiento.equals("") ||
                 numLoteProducto.equals("")
         ) {
-    		return "errorTratamiento.html";
+    		return "campos_erroneos_tratamientos.html";
     	}
 
         // Parseo de IDs y fecha inicial
@@ -266,7 +266,7 @@ public class TratamientoController {
                 inicioTratamiento.equals("") ||
                 numLoteProducto.equals("")
         ) {
-            return "errorTratamiento.html";
+            return "campos_erroneos_tratamientos.html";
         }
 
         // Parseo de IDs y fecha inicial
@@ -298,7 +298,7 @@ public class TratamientoController {
     public String borrar(@PathVariable long id) {
         Tratamiento tratamiento = repTratamientos.getOne(id);
         repTratamientos.deleteById(id);
-        return "borradoConExito.html";
+        return "borrado_tratamiento.html";
     }
 
     @RequestMapping("/tratamiento/filtro")
@@ -307,7 +307,7 @@ public class TratamientoController {
     	
     	//Tratamiento de error
     	if((orden == null) && fechaIntroducida.equals("")) {
-        	return "errorFiltrarTratamiento.html";
+        	return "campos_erroneos_filtrar_tratamientos.html";
         }
     	
     	tratamientos = repTratamientos.findAll().stream();

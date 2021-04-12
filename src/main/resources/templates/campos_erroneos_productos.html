@@ -1,11 +1,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8" />
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" th:href="@{/css/errores.css}">
 </head>
 <body>
-	<p>
-		<b>Alguno de los campos obligatorios no se ha rellenado.</b>
-	</p>
-	<br>
+	<div id="container_productos">
+		<header>
+			<h1>
+				<img id="icono" th:src="@{/imagenes/heart.png}"> Gestión
+				agrícola
+			</h1>
+		</header>
+		<p>
+			<b>No se ha podido crear o modificar el producto</b>
+			<br><br>
+			Puede que no se haya introducido:
+		</p>
+		<br>
+		<ol>
+			<li>Nombre del producto</li>
+			<li>Plazo de reentrada válido</li>
+			<li>Plazo de recolección válido</li>
+		</ol>
+		<br>
+	</div>
 </body>
 </html>
