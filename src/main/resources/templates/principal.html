@@ -1,13 +1,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
+<link rel="stylesheet" th:href="@{/css/principal.css}">
 </head>
 <body>
-	<h2> Explotación agrícola </h2>
-	<a href="/productos/"> Productos </a>
-	<br>
-	<a href="/cultivos/"> Cultivos </a>
-	<br>
-	<a href="/tratamiento/"> Tratamientos </a>
+	<div id="container_principal">
+		<header>
+			<h1>
+				<img id="icono" th:src="@{/imagenes/heart.png}"> Gestión
+				agrícola
+			</h1>
+		</header>
+		<div id="fondo_principal">
+			<h2>Explotación agrícola</h2>
+			<a href="/productos/"> Productos </a>
+			<br>
+			<a href="/cultivos/"> Cultivos </a>
+			<br>
+			<a href="/tratamiento/"> Tratamientos </a>	
+		</div>
+	</div>
 </body>
 </html>
