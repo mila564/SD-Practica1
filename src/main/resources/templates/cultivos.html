@@ -1,17 +1,31 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
+<link rel="stylesheet" th:href="@{/css/mostrar.css}"/>
 </head>
 <body>
+	<div id="container_cultivo">
+	<header>
+			
+		<h1><img id="icono" th:src="@{/imagenes/heart.png}"> Gestión agrícola:  Cultivo</h1>
+	</header>
+	<div id="fondo">
+	<form id="form1">
 	<h2>Cultivos</h2>
 	<p th:each="cultivo : ${cultivos}">
 		<a th:href="@{/cultivos/mostrar/{id}(id=${cultivo.id})}"><span
 			th:text="${cultivo.nombre}"></span></a>
+	
 	</p>
 	<br>
-	<a href="/nuevoCultivo.html"><span> Añadir cultivo </span></a>
+	<br>
+	<a CLASS="button" href="/nuevoCultivo.html"><span> Añadir cultivo </span></a>
 	<br>
 	<br>
-	<a href="/">Volver a la página principal</a>
+	<a CLASS="button" href="/">Volver a la página principal</a>
+	</form>
+	
+	</div>
+</div>	
 </body>
 </html>
