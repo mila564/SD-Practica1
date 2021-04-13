@@ -1,11 +1,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
+<link rel="stylesheet" th:href="@{/css/editado.css}"/>
 </head>
 <body>
-	<p>
-		<b>Editado con éxito</b>
-	</p>
-	<br>
-	<a href="/productos/">Volver</a>
+	<div id="container_producto">
+		<header>
+			<h1><img id="icono" th:src="@{/imagenes/heart.png}"> Gestión agrícola: Producto modificado</h1>
+		<div id="fondo">
+		<div id="texto_recuadro">
+			<p>
+				<b>Editado con éxito</b>
+			</p>
+		</div>
+		<br>
+		<a CLASS="button" href="/productos/">Volver</a>
+		</div>
+	</div>
 </body>
