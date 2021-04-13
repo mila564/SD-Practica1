@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import sd.urjc.proyecto.model.Producto;
 import sd.urjc.proyecto.model.Tratamiento;
@@ -40,12 +41,24 @@ public class ProductoController {
 	}
 	
 	@RequestMapping("/productos/nuevoProducto")
-	public String añadirProducto (Producto producto, Model model) {
-		if (!producto.getNombre().equals("") 
-				&& producto.getPlazoRecoleccion()>= 0 
-				&& producto.getPlazoReentrada() >= 0) {
-			repProductos.save(producto);
-			return "creado_producto";
+	public String añadirProducto (@RequestParam String nombre,
+			@RequestParam String descripcion,
+			@RequestParam String plazoReentrada,
+			@RequestParam String plazoRecoleccion, Model model) {
+		int plazoRec, plazoReen;
+		Producto producto;
+		if (!nombre.equals("") && !plazoReentrada.equals("")
+				&& !plazoRecoleccion.equals("")) {
+			plazoReen = Integer.parseInt(plazoReentrada);
+			plazoRec = Integer.parseInt(plazoRecoleccion);
+			if ((plazoReen >= 0) && (plazoRec >= 0)) {
+				producto = new Producto(nombre, descripcion, plazoReen, plazoRec);
+				repProductos.save(producto);
+				return "creado_producto";
+			}
+			else {
+				return "campos_erroneos_productos";
+			}
 		}
 		else {
 			return "campos_erroneos_productos";
