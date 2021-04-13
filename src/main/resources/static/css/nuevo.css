@@ -33,13 +33,26 @@ header{
 	font-size: 20px;
 	width: 100%;
 }
+#cabecera_texto{
+	display: inline;
+	width:100px;
+}
+#modificar_producto{
+	font-size:13px;
+}
 #form{
 	text-align: center;
 	font-size: 20px;
 	opacity: 1;
 }
+a:link{
+    text-decoration: none;
+}
+a:visited{
+    text-decoration: none;
+}
 #fondo_formulario{
-	padding-bottom: 5px;
+	padding-bottom: 15px;
 	padding-top: 1px;
 	border-radius: 10px;
 	width:260px;
@@ -60,6 +73,15 @@ header{
 	color:#CFDA9C;
 	font-size: 18px;
 	padding: 8px;
+}
+.button2{
+    border-radius: 10px;
+    border-style: 4px solid ;
+   	border-color:#70ed6d;
+   	background-color: #8BC341;
+   	color:#CFDA9C;
+   	font-size: 18px;
+    padding: 8px;
 }
 h1{
 	margin: 0px 0px 0px 0px;

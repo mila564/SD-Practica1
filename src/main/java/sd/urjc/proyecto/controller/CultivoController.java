@@ -125,5 +125,10 @@ public class CultivoController {
 			}
 		
 	}
+
+	@RequestMapping("/cultivos/formulario")
+	public String formularioCrear() {
+		return "nuevoCultivo";
+	}
 	
 }

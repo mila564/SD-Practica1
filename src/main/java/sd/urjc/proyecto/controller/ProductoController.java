@@ -112,4 +112,9 @@ public class ProductoController {
 			return "productos";	
 		}
 	}
+
+	@RequestMapping("/productos/formulario")
+	public String formularioCrear() {
+		return "nuevoProducto";
+	}
 }

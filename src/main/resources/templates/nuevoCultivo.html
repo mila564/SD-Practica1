@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" th:href="@{/css/nuevo.css}">
+</head>
+<body>
+	<div id="container_cultivo">
+		<header>
+			<h1><img id="icono" th:src="@{/imagenes/heart.png}"> Gestión agrícola:  Crear cultivo</h1>
+		</header>
+		<div id="fondo_formulario">
+			<div id="form">
+				<form th:action="@{/cultivos/nuevoCultivo}" method="post">
+					<p>Nombre:</p>
+					<input type="text" name="nombre"> <br>
+					<p>Variedad:</p>
+					<input type="text" name="variedad"> <br>
+					<p>Zona:</p>
+					<input type="text" name="zona"> <br>
+					<p>Fecha de plantación:</p>
+					<input type="date" name="fechaPlantacion"><br><br>
+					<input CLASS="button" type="submit" value="Añadir cultivo"> <br>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
