@@ -60,7 +60,7 @@ p{
 	width:360px;
 	height: 150px;
 	margin: 60px auto;
-	background: rgba(255,255,255,0.7);
+	background: rgba(255,255,255,0.9);
 	text-align: center;
 	line-height: 3em;
 }
@@ -72,9 +72,9 @@ a:link, a:visited {
 }
 .button{
 	border-radius: 10px;
-	box-shadow: 0px 0px 5px 1px black;
-	background-color: #CFDA9C;
-	color: #34773B;
+	box-shadow: 0px 0px 5px 1px;
+	background-color: #34773B;
+	color: #CFDA9C;
 	font-size: 18px;
 	padding: 8px;
 	text-decoration: none;
