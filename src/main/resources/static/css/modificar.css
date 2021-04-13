@@ -8,16 +8,19 @@ body{
 	width:100%;
 	height: 100%;
 	background-image:url("../imagenes/campo.jpg");
+	background-repeat: no-repeat;
 }
 #container_cultivo{
 	width:100%;
 	height: 100%;
 	background-image:url("../imagenes/naranja.jpg");
+	background-repeat: no-repeat;
 }
 #container_tratamiento{
 	width:100%;
 	height: 100%;
 	background-image:url("../imagenes/tratamiento.jpeg");
+	background-repeat: no-repeat;
 }
 header{
 	background: #34773B;
