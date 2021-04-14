@@ -5,16 +5,16 @@
 </head>
 <body>
 	<div id="container_cultivo">
-	<header>
-			
+	<header>	
 		<h1><img id="icono" th:src="@{/imagenes/heart.png}"> Gestión agrícola:  Cultivo</h1>
 	</header>
-	<div id="fondo">
+	<div id="fondo_cultivo">
 	<form id="form1">
 	<h2>Cultivos</h2>
 	<p th:each="cultivo : ${cultivos}">
-		<a th:href="@{/cultivos/mostrar/{id}(id=${cultivo.id})}"><span
-			th:text="${cultivo.nombre}"></span></a>
+		<a CLASS="buttonLinks" th:href="@{/cultivos/mostrar/{id}(id=${cultivo.id})}"><span
+			th:text="${cultivo.nombre}"></span>
+		</a>
 	
 	</p>
 	<br>

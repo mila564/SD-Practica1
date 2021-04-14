@@ -1,11 +1,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
+<link rel="stylesheet" th:href="@{/css/mostrar.css}"/>
 </head>
 <body>
-	<h2>Tratamientos</h2>
-	<p>Filtrar tratamientos por fecha:</p>
-	<br>
+<div id="container_tratamiento">
+	<header>
+			
+		<h1><img id="icono" th:src="@{/imagenes/heart.png}"> Gestión agrícola:  Tratamiento</h1>
+	</header>
+	<div id="fondo_tratamiento">
+	<form id="form1">
+	<h3>Filtrar tratamientos por fecha:</h3>
+	
 	<form action="/tratamiento/filtro" method="post">
 		<input type="date" name="fechaIntroducida">
 		<p>
@@ -15,20 +22,27 @@
 			<br>
 			<input type="radio" name="orden" value="fechaRecoleccion">Ordenar por fecha de recolección
 		</p>
-		<input type="submit" value="Filtrar">
-	</form>
+		<input CLASS="button" type="submit" value="Filtrar">
+		
+
 	<br>
 	<p th:each="tratamiento: ${tratamientos}">
-		<a th:href="@{/tratamiento/{id}(id=${tratamiento.idTratamiento})}">
+		<a CLASS="buttonLinks" th:href="@{/tratamiento/{id}(id=${tratamiento.idTratamiento})}">
 			Tratamiento <span th:text="${tratamiento.idTratamiento}"></span>
 		</a>
 	</p>
 	<p>
 		<br>
-		<br> <a href="/tratamiento/formulario_crear">Añadir tratamiento</a>
+		<br>
+		<a CLASS="button" href="/tratamiento/formulario_crear"><span> Añadir Tratamiento </span></a>
 		<br>
 		<br>
-		<a href="/">Volver a la página principal</a>
+		<a CLASS="button" href="/">Volver a la página principal</a>
 	</p>
+	</form>
+
+	</form>
+	</div>
+</div>
 </body>
 </html>

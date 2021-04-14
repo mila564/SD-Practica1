@@ -6,14 +6,12 @@
 <body>
 	<div id="container_cultivo">
 	<header>
-			
 		<h1><img id="icono" th:src="@{/imagenes/heart.png}"> Gestión agrícola:  Cultivo</h1>
 	</header>
-	<div id="fondo">
+	<div id="fondo_cultivo">
 	<form id="form1">
 	<h3 th:text="'Nombre: ' + ${cultivo.nombre}"></h3>
 	<br />
-	
 	<span th:text="'Variedad: '+ ${cultivo.variedad}"></span>
 	<br />
 	<p th:text="'Zona: '+ ${cultivo.zona}"></p>
@@ -25,11 +23,10 @@
 	<p>Tratamientos: </p>
 	
 	<p th:each= "tratamiento : ${cultivo.tratamientos}">
-		<a CLASS="bottonTratamiento" th:href="@{/tratamiento/{id}(id=${tratamiento.idTratamiento})}">
+		<a CLASS="buttonLinks" th:href="@{/tratamiento/{id}(id=${tratamiento.idTratamiento})}">
 		<span th:text="'Tratamiento '+ ${tratamiento.idTratamiento}"></span>
 		</a>
 	</p>
-	<br />
 	<br />
 	<a CLASS="button" th:href="@{/cultivos/modificar/{id}(id=${cultivo.id})}"> Editar </a>	
 	<br />
@@ -42,6 +39,6 @@
 	</form>
 	
 	</div>
-</div>		
+	</div>		
 </body>
 </html>
