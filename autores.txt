@@ -1,0 +1,25 @@
+Sonia Casero Pérez 50572546P
+
+Desarrollo de la clase, repositorio y controlador de tratamientos. Colaboración en la realización de tratamiento de errores y mensaje de éxito relacionados con tratamiento.
+Creación de los html relacionados con tratamientos.
+Participación en la creación de los css de los html relacionados con modificar cultivos, productos y tratamientos.
+
+Milagros Mouriño Ursul 50366324G
+
+Implementación de la clase, repositorio y controlador de los productos así como las plantillas que devuelven los métodos del controlador. 
+Colaboración en la elaboración del controlador de la clase Cultivo y ayuda en la funcionalidad de ordenar y filtrar tratamientos.
+Adicionalmente, la realización del CSS en la pestaña principal de la aplicación, los html de borrado exitoso y notificación de campos erroneos (productos, cultivos y tratamientos). 
+
+Fátima Ezahra Smounat Mahidar 53804450K
+
+Elaboración de la clase, repositorio y controlador de cultivos. 
+Colaboración en los mensajes de éxito relacionados con cultivo. 
+Composición de los html relacionados con cultivo. 
+Creación de las hojas de estilo de las páginas principales (cultivo, producto y tratamiento) además de las de mostrar productos, cultivos y tratamientos.
+
+Juan Antonio Vinaches Vizcaino 50498773L
+
+Desarrollo de la clase, repositorio y controlador de tratamientos. Colaboración en la realización de tratamiento de errores y mensaje de éxito relacionados con tratamiento.
+Creación de los html relacionados con tratamientos.
+Participación en la creación de los css de los html relacionados con agregar cultivos, productos y tratamientos, y sus mensajes de éxito.
+ 
