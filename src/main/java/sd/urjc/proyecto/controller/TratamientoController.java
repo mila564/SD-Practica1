@@ -322,7 +322,7 @@ public class TratamientoController {
         }
         
         //orden
-        if(!orden.equals("")) {
+        if(orden != null) {
         	switch(orden) {
         		case "especie":
         			tratamientos = tratamientos.sorted(Comparator.comparing(t -> t.getCultivo().getNombre()));
