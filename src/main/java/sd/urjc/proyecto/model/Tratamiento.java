@@ -8,10 +8,8 @@ public class Tratamiento {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idTratamiento;
-    //private long idCultivo;
     @ManyToOne
     private Cultivo cultivo;
-    //private long idProducto;
     @ManyToOne
     private Producto producto;
     private String numLoteProducto;

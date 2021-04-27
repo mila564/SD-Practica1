@@ -1,6 +1,7 @@
 package sd.urjc.proyecto.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import javax.annotation.PostConstruct;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -303,40 +305,44 @@ public class TratamientoController {
 
     @RequestMapping("/tratamiento/filtro")
     public String filtrarTratamientos(Model model, String fechaIntroducida, String orden) {
-    	Stream<Tratamiento> tratamientos;
-    	
+    	List<Tratamiento> tratamientos = new ArrayList<Tratamiento>();
+    	LocalDate fechaFiltrado = LocalDate.parse(fechaIntroducida);
     	//Tratamiento de error
     	if((orden == null) && fechaIntroducida.equals("")) {
         	return "campos_erroneos_filtrar_tratamientos.html";
         }
-    	
-    	tratamientos = repTratamientos.findAll().stream();
-    	
-    	//filtrado por fecha
-        if(!fechaIntroducida.equals("")) {
-        	LocalDate fechaFiltrado = LocalDate.parse(fechaIntroducida);
-            tratamientos = tratamientos.filter(
-                    tratamiento -> fechaFiltrado.isBefore(tratamiento.getFinPlazoReentrada())
-                    || fechaFiltrado.isBefore(tratamiento.getFinPlazoRecoleccion())
-            );
-        }
-        
-        //orden
-        if(orden != null) {
+    	//Ordenado
+    	else if (orden != null && fechaIntroducida.equals("")) {
         	switch(orden) {
-        		case "especie":
-        			tratamientos = tratamientos.sorted(Comparator.comparing(t -> t.getCultivo().getNombre()));
-        			break;
-        		case "fechaReentrada":
-        			tratamientos = tratamientos.sorted(Comparator.comparing(t -> t.getFinPlazoReentrada()));
-        			break;
-        		case "fechaRecoleccion":
-        			tratamientos = tratamientos.sorted(Comparator.comparing(t -> t.getFinPlazoRecoleccion()));
-        			break;
+    			case "especie":
+    					tratamientos = repTratamientos.findByOrderByCultivoNombreAsc();
+    					break;
+    			case "fechaReentrada":
+    					tratamientos = repTratamientos.findByOrderByFinPlazoReentradaAsc();
+    					break;
+    			case "fechaRecoleccion":
+    					tratamientos = repTratamientos.findByOrderByFinPlazoRecoleccionAsc();
         	}
         }
+    	//Filtrado 
+    	else if (orden == null && !fechaIntroducida.equals("")) {
+        	tratamientos = repTratamientos.findAllByFinPlazoReentradaGreaterThanEqualOrFinPlazoRecoleccionGreaterThanEqual(fechaFiltrado, fechaFiltrado);
+        }
+    	//Ordenado y filtrado
+    	else {
+    		switch(orden) {
+			case "especie":
+					tratamientos = repTratamientos.findAllByFinPlazoReentradaGreaterThanEqualOrFinPlazoRecoleccionGreaterThanEqualOrderByCultivoNombreAsc(fechaFiltrado, fechaFiltrado);
+					break;
+			case "fechaReentrada":
+					tratamientos = repTratamientos.findAllByFinPlazoReentradaGreaterThanEqualOrFinPlazoRecoleccionGreaterThanEqualOrderByFinPlazoReentradaAsc(fechaFiltrado, fechaFiltrado);
+					break;
+			case "fechaRecoleccion":
+					tratamientos = repTratamientos.findAllByFinPlazoReentradaGreaterThanEqualOrFinPlazoRecoleccionGreaterThanEqualOrderByFinPlazoRecoleccionAsc(fechaFiltrado, fechaFiltrado);
+    	}
+    	}
+        model.addAttribute("tratamientos", tratamientos);
         
-        model.addAttribute("tratamientos", tratamientos.collect(Collectors.toList()));
         return "tratamientos.html";
     }
 }
