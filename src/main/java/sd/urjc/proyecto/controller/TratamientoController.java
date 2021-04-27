@@ -306,7 +306,7 @@ public class TratamientoController {
     @RequestMapping("/tratamiento/filtro")
     public String filtrarTratamientos(Model model, String fechaIntroducida, String orden) {
     	List<Tratamiento> tratamientos = new ArrayList<Tratamiento>();
-    	LocalDate fechaFiltrado = LocalDate.parse(fechaIntroducida);
+    	LocalDate fechaFiltrado;
     	//Tratamiento de error
     	if((orden == null) && fechaIntroducida.equals("")) {
         	return "campos_erroneos_filtrar_tratamientos.html";
@@ -326,23 +326,24 @@ public class TratamientoController {
         }
     	//Filtrado 
     	else if (orden == null && !fechaIntroducida.equals("")) {
+    		fechaFiltrado = LocalDate.parse(fechaIntroducida);
         	tratamientos = repTratamientos.findAllByFinPlazoReentradaGreaterThanEqualOrFinPlazoRecoleccionGreaterThanEqual(fechaFiltrado, fechaFiltrado);
         }
     	//Ordenado y filtrado
     	else {
+    		fechaFiltrado = LocalDate.parse(fechaIntroducida);
     		switch(orden) {
-			case "especie":
-					tratamientos = repTratamientos.findAllByFinPlazoReentradaGreaterThanEqualOrFinPlazoRecoleccionGreaterThanEqualOrderByCultivoNombreAsc(fechaFiltrado, fechaFiltrado);
-					break;
-			case "fechaReentrada":
-					tratamientos = repTratamientos.findAllByFinPlazoReentradaGreaterThanEqualOrFinPlazoRecoleccionGreaterThanEqualOrderByFinPlazoReentradaAsc(fechaFiltrado, fechaFiltrado);
-					break;
-			case "fechaRecoleccion":
-					tratamientos = repTratamientos.findAllByFinPlazoReentradaGreaterThanEqualOrFinPlazoRecoleccionGreaterThanEqualOrderByFinPlazoRecoleccionAsc(fechaFiltrado, fechaFiltrado);
-    	}
+				case "especie":
+						tratamientos = repTratamientos.findAllByFinPlazoReentradaGreaterThanEqualOrFinPlazoRecoleccionGreaterThanEqualOrderByCultivoNombreAsc(fechaFiltrado, fechaFiltrado);
+						break;
+				case "fechaReentrada":
+						tratamientos = repTratamientos.findAllByFinPlazoReentradaGreaterThanEqualOrFinPlazoRecoleccionGreaterThanEqualOrderByFinPlazoReentradaAsc(fechaFiltrado, fechaFiltrado);
+						break;
+				case "fechaRecoleccion":
+						tratamientos = repTratamientos.findAllByFinPlazoReentradaGreaterThanEqualOrFinPlazoRecoleccionGreaterThanEqualOrderByFinPlazoRecoleccionAsc(fechaFiltrado, fechaFiltrado);
+    		}
     	}
         model.addAttribute("tratamientos", tratamientos);
-        
         return "tratamientos.html";
     }
 }
